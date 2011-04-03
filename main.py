@@ -17,24 +17,20 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import Tapper
+import index
 import getScoreUid
 import getScore
 import putScore
 
-class MainHandler(webapp.RequestHandler):
-    def get(self):
-        self.response.out.write('Login Page')
-
 def main():
     application = webapp.WSGIApplication(
         [
-            ('/', MainHandler),
-            ('/putScore/', PutScoreHandler),
-            ('/getScore/', GetScoreHandler),
-            ('/getScore/(\d+)/', GetScoreUidHandler),
+            ('/', index.MainHandler),
+            ('/putScore/', putScore.PutScoreHandler),
+            ('/getScore/', getScore.GetScoreHandler),
+            ('/getScore/(\d+)/', getScoreUid.GetScoreUidHandler),
         ], debug=True)
     util.run_wsgi_app(application)
-
 
 if __name__ == '__main__':
     main()
