@@ -1,5 +1,6 @@
 from google.appengine.ext import db
 
+
 # A Tapper is a player who taps
 class Tapper(db.Model):
     # The Facebook UID of the player

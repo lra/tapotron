@@ -5,6 +5,7 @@ from google.appengine.ext import webapp
 
 from Tapper import Tapper
 
+
 class PutScoreHandler(webapp.RequestHandler):
 	def get(self, uid, score):
 		saved = False

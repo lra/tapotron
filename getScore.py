@@ -2,6 +2,7 @@ from google.appengine.ext import webapp
 
 from Tapper import Tapper
 
+
 class GetScoreHandler(webapp.RequestHandler):
 	def get(self, uid):
 		score = 0

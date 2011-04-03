@@ -22,6 +22,7 @@ import getScore
 import putScore
 import debug
 
+
 def main():
 	application = webapp.WSGIApplication(
 		[
