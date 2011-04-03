@@ -13,12 +13,20 @@ function sendResult() {
    if (data == 0) {
      alert('Not your best score');
    } else {
-     alert('High Score saved'); 
+     $('#best-score').text(count);
    }
+  count = 0;
+  previous_count = 0;
  });
 }
 
-
+function getBestScore() {
+ $.get('/getScore/'+uid+'/',function(data) {
+    var score = data.split(':');
+    $('#best-score').text(score[1]);
+  }
+)
+}
 
 //preload the two states of the image
 function preloadImages() {
@@ -87,8 +95,6 @@ function incrementCounter(event) {
       clearTimeout(timer);
       sendResult();
       stopGame();
-      count = 0;
-      previous_count = 0; 
     } 
   }
 }
@@ -115,6 +121,7 @@ function startNewGame() {
 $(document).ready(function(){
   preloadImages(['button_up.png','button_down.png']);
   $('#start-button').click(function(){ startNewGame(); });
+  getBestScore();
 });
 
 
