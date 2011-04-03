@@ -20,13 +20,15 @@ import Tapper
 import index
 import getScore
 import putScore
+import debug
 
 def main():
 	application = webapp.WSGIApplication(
 		[
 			('/', index.MainHandler),
 			('/putScore/(\w+)/(\d+)/', putScore.PutScoreHandler),
-			('/getScore/(\w+)/', getScore.GetScoreHandler)
+			('/getScore/(\w+)/', getScore.GetScoreHandler),
+			('/debug/', debug.debug)
 		], debug=True)
 	util.run_wsgi_app(application)
 
