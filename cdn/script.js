@@ -10,7 +10,11 @@ var timer;
 
 function sendResult() {
  $.get('/putScore/'+uid+'/'+count+'/', function(data) {
-   alert('Score saved'); 
+   if (data == 0) {
+     alert('error');
+   } else {
+     alert('Score saved'); 
+   }
  });
 }
 
@@ -74,8 +78,9 @@ function incrementCounter(event) {
       $('#time').text((event.timeStamp - first_timestamp));
     } else {
       clearTimeout(timer);
+      alert('Done');
       sendResult();
-      count = 0; 
+     // count = 0; 
     } 
   }
 }
