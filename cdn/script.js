@@ -1,8 +1,20 @@
-var count = 0
+var count = 0;
+var previous_count = 0;
+
+
 var first_timestamp = 0;
 var max_duration = 60000;
 
 var cache = [];
+var timer;
+
+function sendResult() {
+ $.get('/putScore/'+uid+'/'+count+'/', function(data) {
+   alert('Score saved'); 
+ });
+}
+
+
 
 //preload the two states of the image
 function preloadImages() {
@@ -34,8 +46,17 @@ function setUpListeners() {
 
 // set the first timestamp : start of the game
 function startTimer(event) {
+  displayClicks();
   first_timestamp = event.timeStamp;
 }
+
+function displayClicks() {
+  var current = count - previous_count;
+  $('#graph-container').append('<div class="graph-points" style="height:'+(current*10+1)+'px">');
+  previous_count = count;
+  timer = setTimeout(displayClicks,100);
+}
+
 
 // increments the counter. If the counter was empty, start the timer.
 // if not check that the current timer is below the max duration of the timer.
@@ -52,9 +73,10 @@ function incrementCounter(event) {
       $('#counter').text(count);
       $('#time').text((event.timeStamp - first_timestamp));
     } else {
-      alert('done');
+      clearTimeout(timer);
+      sendResult();
+      count = 0; 
     } 
-
   }
 }
 
