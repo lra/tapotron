@@ -12,6 +12,8 @@ from django.utils import simplejson as json
 
 from google.appengine.ext import db
 
+from Tapper import Tapper
+
 
 def base64_url_decode(data):
 	data = data.encode(u'ascii')
@@ -33,12 +35,11 @@ class MainHandler(webapp.RequestHandler):
 
 	def post(self):
 		signed_request = cgi.escape(self.request.get('signed_request'))
-
 		try:
 			sig, payload = signed_request.split(u'.', 1)
 			sig = base64_url_decode(sig)
 			data = json.loads(base64_url_decode(payload))
-
+			
 			expected_sig = hmac.new(
 				self.app_secret, msg=payload, digestmod=hashlib.sha256).digest()
 
@@ -56,14 +57,16 @@ class MainHandler(webapp.RequestHandler):
 			install_html = '<html><body><script type="text/javascript">parent.location.href="'+install_url+'";</script></body></html>'
 			self.response.out.write(install_html)
 		else:
-			q = db.Query(Tapper).filter('facebook_uid =', self.fb_user_id)
-			tapper = q.get()
+			query = db.GqlQuery("SELECT * FROM Tapper WHERE facebook_uid = :1", long(self.fb_user_id))
+			tapper = query.get()
 			if not tapper:
-				tapper = Tapper(facebook_uid=self.fb_user_id)
+				tapper = Tapper(facebook_uid=long(self.fb_user_id))
+				self.response.out.write('New user!')
 			tapper.put()
-			template_values = {'uid': tapper.key()}
+			template_values = {'uid': self.fb_user_id}
 			path = 'templates/index.html'
 			self.response.out.write(template.render(path, template_values))
+			self.response.out.write(signed_request)
 
 			# self.response.out.write('<html><body>POST You wrote:<pre>')
 			# self.response.out.write('Passed in if: '+str(self.passed))
