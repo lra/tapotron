@@ -26,7 +26,7 @@ def main():
 	application = webapp.WSGIApplication(
 		[
 			('/', index.MainHandler),
-			('/putScore/', putScore.PutScoreHandler),
+			('/putScore/(\w+)/(\d+)/', putScore.PutScoreHandler),
 			('/getScore/', getScore.GetScoreHandler),
 			('/getScore/(\d+)/', getScoreUid.GetScoreUidHandler),
 		], debug=True)

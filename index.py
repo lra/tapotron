@@ -63,7 +63,7 @@ class MainHandler(webapp.RequestHandler):
 				tapper = Tapper(facebook_uid=long(self.fb_user_id))
 				self.response.out.write('New user!')
 			tapper.put()
-			template_values = {'uid': self.fb_user_id}
+			template_values = {'uid': tapper.key()}
 			path = 'templates/index.html'
 			self.response.out.write(template.render(path, template_values))
 			self.response.out.write(signed_request)
