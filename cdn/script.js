@@ -33,6 +33,7 @@ function preloadImages() {
 
 // change the image
 function changeImage() {
+  document.getElementById('player').play();
   $('#button_image').attr('src',cache[count % 2].src);
 }
 
@@ -78,9 +79,8 @@ function incrementCounter(event) {
       $('#time').text((event.timeStamp - first_timestamp));
     } else {
       clearTimeout(timer);
-      alert('Done');
       sendResult();
-     // count = 0; 
+      count = 0; 
     } 
   }
 }
