@@ -6,7 +6,5 @@ REST calls:
  - /getScore/uid/     Get the highest score for the player with the id 123
 
 TODO:
- - Implement the putScore
- - Implement the getScore of the current user
  - Implement the getScore for a different user
  - Call the REST API from the HTML file
