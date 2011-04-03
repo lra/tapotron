@@ -23,14 +23,14 @@ import getScore
 import putScore
 
 def main():
-    application = webapp.WSGIApplication(
-        [
-            ('/', index.MainHandler),
-            ('/putScore/', putScore.PutScoreHandler),
-            ('/getScore/', getScore.GetScoreHandler),
-            ('/getScore/(\d+)/', getScoreUid.GetScoreUidHandler),
-        ], debug=True)
-    util.run_wsgi_app(application)
+	application = webapp.WSGIApplication(
+		[
+			('/', index.MainHandler),
+			('/putScore/', putScore.PutScoreHandler),
+			('/getScore/', getScore.GetScoreHandler),
+			('/getScore/(\d+)/', getScoreUid.GetScoreUidHandler),
+		], debug=True)
+	util.run_wsgi_app(application)
 
 if __name__ == '__main__':
-    main()
+	main()
