@@ -3,9 +3,10 @@ import base64
 import hashlib
 import hmac
 import time
-
+import os
 
 from google.appengine.ext import webapp
+from google.appengine.ext.webapp import template
 
 from django.utils import simplejson as json
 
@@ -22,10 +23,10 @@ class MainHandler(webapp.RequestHandler):
     user_id = None
 
     def get(self):
-        self.response.out.write('<html><body>GET You wrote:<pre>')
-        self.response.out.write(cgi.escape(self.request.get('signed_request')))
-        self.response.out.write('</pre></body></html>')
-        
+        # self.response.out.write('<html><body>GET You wrote:<pre>')
+        # self.response.out.write(cgi.escape(self.request.get('signed_request')))
+        # self.response.out.write('</pre></body></html>')
+        self.post()
 
     def post(self):
         signed_request = cgi.escape(self.request.get('signed_request'))
@@ -52,8 +53,12 @@ class MainHandler(webapp.RequestHandler):
             install_html = '<html><body><script type="text/javascript">parent.location.href="'+install_url+'";</script></body></html>'
             self.response.out.write(install_html)
         else:
-            self.response.out.write('<html><body>POST You wrote:<pre>')
-            self.response.out.write('Passed in if: '+str(self.passed))
-            self.response.out.write(str(self.user_id))
-            self.response.out.write('</pre></body></html>')
+            template_values = {'uid': self.user_id}
+            path = 'templates/index.html'
+            self.response.out.write(template.render(path, template_values))
+
+            # self.response.out.write('<html><body>POST You wrote:<pre>')
+            # self.response.out.write('Passed in if: '+str(self.passed))
+            # self.response.out.write(str(self.user_id))
+            # self.response.out.write('</pre></body></html>')
 

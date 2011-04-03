@@ -7,8 +7,6 @@ REST calls:
  - /getScore/123/ Get the highest score for the player with the id 123
 
 TODO:
- - Parse the signed_request from FB to extract the FB uid
- - Display the static HTML file in the MainHandler
  - Create the user if he's unknown
  - Implement the putScore
  - Implement the getScore of the current user
