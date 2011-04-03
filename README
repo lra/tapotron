@@ -4,3 +4,8 @@ REST calls:
  - / Login page
  - /putScore/uid/123/ Save 123 as a new score for the current player
  - /getScore/uid/     Get the highest score for the player with the id 123
+
+Format of the config.yaml file:
+
+facebook_app_id: %FACEBOOK_APP_ID%
+facebook_app_secret_key: %FACEBOOK_APP_SECRET_KEY%
