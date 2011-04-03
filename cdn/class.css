@@ -13,3 +13,16 @@
 
 /* Time Display*/
 #time {}
+
+/* Graph Container*/
+#graph-container {
+  width: 1000px;
+  height: 500px;
+}
+
+/* Graph points*/
+.graph-points {
+  float:left;
+  width: 1px;
+  background-color: blue;
+}
