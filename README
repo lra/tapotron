@@ -5,3 +5,12 @@ REST calls:
  - /putScore/123/ Save 123 as a new score for the current player
  - /getScore/ Get the highest score for the current player
  - /getScore/123/ Get the highest score for the player with the id 123
+
+TODO:
+ - Parse the signed_request from FB to extract the FB uid
+ - Display the static HTML file in the MainHandler
+ - Create the user if he's unknown
+ - Implement the putScore
+ - Implement the getScore of the current user
+ - Implement the getScore for a different user
+ - Call the REST API from the HTML file
