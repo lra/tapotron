@@ -17,23 +17,13 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import Tapper
+import getScoreUid
+import getScore
+import putScore
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
         self.response.out.write('Login Page')
-
-class PutScoreHandler(webapp.RequestHandler):
-    def get(self):
-        self.response.out.write('Put a new score')
-
-class GetScoreHandler(webapp.RequestHandler):
-    def get(self):
-        self.response.out.write('Get my own score')
-
-class GetScoreUidHandler(webapp.RequestHandler):
-    def get(self, uid):
-        self.response.out.write('Get someone\'s score')
-
 
 def main():
     application = webapp.WSGIApplication(
