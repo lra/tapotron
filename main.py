@@ -18,7 +18,6 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import Tapper
 import index
-import getScoreUid
 import getScore
 import putScore
 
@@ -27,8 +26,7 @@ def main():
 		[
 			('/', index.MainHandler),
 			('/putScore/(\w+)/(\d+)/', putScore.PutScoreHandler),
-			('/getScore/', getScore.GetScoreHandler),
-			('/getScore/(\d+)/', getScoreUid.GetScoreUidHandler),
+			('/getScore/(\w+)/', getScore.GetScoreHandler)
 		], debug=True)
 	util.run_wsgi_app(application)
 

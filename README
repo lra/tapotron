@@ -4,7 +4,3 @@ REST calls:
  - / Login page
  - /putScore/uid/123/ Save 123 as a new score for the current player
  - /getScore/uid/     Get the highest score for the player with the id 123
-
-TODO:
- - Implement the getScore for a different user
- - Call the REST API from the HTML file
