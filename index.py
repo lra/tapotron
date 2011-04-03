@@ -30,8 +30,7 @@ def get_fbuid_from_signed_request(signed_request):
 		sig = base64_url_decode(sig)
 		data = json.loads(base64_url_decode(payload))
 		
-		expected_sig = hmac.new(
-			self.app_secret, msg=payload, digestmod=hashlib.sha256).digest()
+		expected_sig = hmac.new(app_secret, msg=payload, digestmod=hashlib.sha256).digest()
 
 		# allow the signed_request to function for upto 1 day
 		if sig == expected_sig and data[u'issued_at'] > (time.time() - 86400):
