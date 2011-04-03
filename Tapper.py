@@ -6,10 +6,10 @@ class Tapper(db.Model):
     facebook_uid = db.IntegerProperty(required = True)
     
     # The creation date of the profile
-    creation_date = db.DateTimeProperty(required = True)
+    creation_date = db.DateTimeProperty(required = True, auto_now_add=True)
     
     # The latest time the tapper logged in
-    login_date = db.DateTimeProperty(required = True)
+    login_date = db.DateTimeProperty(required = True, auto_now=True)
     
     # The highest score of the tapper
     score = db.IntegerProperty()
