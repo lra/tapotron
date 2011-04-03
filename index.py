@@ -15,6 +15,7 @@ from google.appengine.ext import db
 from Tapper import Tapper
 
 import tools
+import config
 
 
 def base64_url_decode(data):
@@ -23,7 +24,7 @@ def base64_url_decode(data):
 	return base64.urlsafe_b64decode(data)
 
 def get_fbuid_from_signed_request(signed_request):
-	app_secret = '3343b1814e225d22b55a92cbb04c970f'
+	app_secret = config.get('facebook_app_secret_key')
 
 	try:
 		sig, payload = signed_request.split(u'.', 1)
@@ -42,7 +43,7 @@ def get_fbuid_from_signed_request(signed_request):
 
 class MainHandler(webapp.RequestHandler):
 
-	app_id = '152524664810770'
+	app_id = config.get('facebook_app_id')
 	test_uid = 123
 	passed = False
 	fb_user_id = None
