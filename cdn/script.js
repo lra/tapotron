@@ -19,11 +19,11 @@ function sendResult() {
 //preload the two states of the image
 function preloadImages() {
     var cacheImage = document.createElement('img');
-    cacheImage.src = 'button_up.png';
+    cacheImage.src = '/cdn/button_up.png';
     cache.push(cacheImage);
     
     var cacheImage2 = document.createElement('img');
-    cacheImage2.src = 'button_down.png';
+    cacheImage2.src = '/cdn/button_down.png';
     cache.push(cacheImage2);
 }
 
