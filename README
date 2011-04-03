@@ -2,9 +2,8 @@ Tap and tap faster!
 
 REST calls:
  - / Login page
- - /putScore/123/ Save 123 as a new score for the current player
- - /getScore/ Get the highest score for the current player
- - /getScore/123/ Get the highest score for the player with the id 123
+ - /putScore/uid/123/ Save 123 as a new score for the current player
+ - /getScore/uid/     Get the highest score for the player with the id 123
 
 TODO:
  - Create the user if he's unknown

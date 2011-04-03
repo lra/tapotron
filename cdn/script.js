@@ -8,6 +8,14 @@ var max_duration = 60000;
 var cache = [];
 var timer;
 
+function sendResult() {
+ $.get('/putScore/'+uid+'/'+count+'/', function(data) {
+   alert('Score saved'); 
+ });
+}
+
+
+
 //preload the two states of the image
 function preloadImages() {
     var cacheImage = document.createElement('img');
@@ -66,9 +74,9 @@ function incrementCounter(event) {
       $('#time').text((event.timeStamp - first_timestamp));
     } else {
       clearTimeout(timer);
-      alert('done');
+      sendResult();
+      count = 0; 
     } 
-
   }
 }
 
