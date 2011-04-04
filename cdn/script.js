@@ -1,7 +1,6 @@
 var count = 0;
 var previous_count = 0;
 
-
 var first_timestamp = 0;
 var max_duration = 60000;
 
@@ -166,7 +165,6 @@ function startNewGame()
 	$('#counter').text(count);
 	$('#time').text(Math.round(max_duration) / 1000);
 	no_time = Math.floor((Math.random()*(max_duration - 5000))/1000 + 5);
-
 }
 
 $(document).ready(function()
