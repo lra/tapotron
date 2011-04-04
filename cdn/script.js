@@ -79,7 +79,7 @@ function displayNoButton() {
     no_button_displayed = false;
   } else {
     no_button_displayed = true;
-    $('#button_image').attr('src',cache[2].src);
+    $('#button').attr('src',cache[2].src);
     setTimeout(displayNoButton,1000);
   }
 }
