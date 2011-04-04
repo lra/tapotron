@@ -11,14 +11,22 @@ var timer;
 function sendResult() {
  $.get('/putScore/'+uid+'/'+count+'/', function(data) {
    if (data == 0) {
-     alert('error');
+     alert('Not your best score');
    } else {
-     alert('Score saved'); 
+     $('#best-score').text(count);
    }
+  count = 0;
+  previous_count = 0;
  });
 }
 
-
+function getBestScore() {
+ $.get('/getScore/'+uid+'/',function(data) {
+    var score = data.split(':');
+    $('#best-score').text(score[1]);
+  }
+)
+}
 
 //preload the two states of the image
 function preloadImages() {
@@ -40,13 +48,19 @@ function changeImage() {
 
 // registers keyboard and mouse to listen to each press
 function setUpListeners() {
-  $('body').click(function(event) {
-    incrementCounter(event);
-  });
+  $('body').click(
+    incrementCounter
+  );
 
-  $('body').keypress(function(event) {
-    incrementCounter(event);
-  });
+  $('body').keypress(
+    incrementCounter
+  );
+}
+
+function removeListeners() {
+  $('body').unbind('click',incrementCounter);
+  $('body').unbind('keypress',incrementCounter);
+
 }
 
 // set the first timestamp : start of the game
@@ -57,9 +71,9 @@ function startTimer(event) {
 
 function displayClicks() {
   var current = count - previous_count;
-  $('#graph-container').append('<div class="graph-points" style="height:'+(current*10+1)+'px">');
+  $('#graph-container').append('<div class="graph-points" style="height:'+(current + 1)+'px">');
   previous_count = count;
-  timer = setTimeout(displayClicks,100);
+  timer = setTimeout(displayClicks,1000);
 }
 
 
@@ -80,15 +94,34 @@ function incrementCounter(event) {
     } else {
       clearTimeout(timer);
       sendResult();
-      count = 0; 
+      stopGame();
     } 
   }
 }
 
+function stopGame() {
+  $('#start-button').show();
+  $('#button').hide();
+  removeListeners();
+}
+
+function startNewGame() {
+  $('#start-button').hide();
+  $('#button').fadeIn('slow', function() {});
+
+  $('#graph-container').empty();
+  changeImage();
+  setUpListeners(); 
+  $('#counter').text(count);
+  $('#time').text('0');
+
+
+}
+
 $(document).ready(function(){
   preloadImages(['button_up.png','button_down.png']);
-  changeImage();
-  setUpListeners();
+  $('#start-button').click(function(){ startNewGame(); });
+  getBestScore();
 });
 
 

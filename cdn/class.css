@@ -1,7 +1,8 @@
 /* The Button Container*/
 #button {
-	height: 500px;
-	width: 500px
+  height: 500px;
+  width: 500px;
+  display:none;
 }
 /* The Button Image*/
 #button_img {}
@@ -14,8 +15,8 @@
 
 /* Graph Container*/
 #graph-container {
-  width: 1000px;
-  height: 500px;
+  width: 100px;
+  height: 100px;
 }
 
 /* Graph points*/
@@ -24,3 +25,11 @@
   width: 1px;
   background-color: blue;
 }
+
+/* Start button*/
+#start-button {}
+
+/* Info Display Container*/
+#info-display { }
+
+
