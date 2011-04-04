@@ -42,7 +42,7 @@ function preloadImages() {
 // change the image
 function changeImage() {
   document.getElementById('player').play();
-  $('#button_image').attr('src',cache[count % 2].src);
+  $('#button').attr('src',cache[count % 2].src);
 }
 
 

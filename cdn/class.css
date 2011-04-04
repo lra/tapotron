@@ -1,11 +1,12 @@
-/* The Button Container*/
+/* The Button */
 #button {
-  height: 500px;
-  width: 500px;
-  display:none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin:auto;
 }
-/* The Button Image*/
-#button_img {}
 
 /* Counter Display*/
 #counter {}
