@@ -7,6 +7,11 @@ var max_duration = 60000;
 
 var cache = [];
 var timer;
+var current_time = 0;
+
+var no_time;
+var no_button_displayed = false;
+
 
 function sendResult() {
  $.get('/putScore/'+uid+'/'+count+'/', function(data) {
@@ -37,6 +42,11 @@ function preloadImages() {
     var cacheImage2 = document.createElement('img');
     cacheImage2.src = '/cdn/button_down.png';
     cache.push(cacheImage2);
+
+
+    var cacheImage3 = document.createElement('img');
+    cacheImage3.src = '/cdn/no.png';
+    cache.push(cacheImage3);
 }
 
 // change the image
@@ -63,6 +73,18 @@ function removeListeners() {
 
 }
 
+function displayNoButton() {
+  if (no_button_displayed) {
+    changeImage();
+    no_button_displayed = false;
+  } else {
+    no_button_displayed = true;
+    $('#button_image').attr('src',cache[2].src);
+    setTimeout(displayNoButton,1000);
+  }
+}
+
+
 // set the first timestamp : start of the game
 function startTimer(event) {
   displayClicks();
@@ -74,6 +96,10 @@ function displayClicks() {
   $('#graph-container').append('<div class="graph-points" style="height:'+(current + 1)+'px">');
   previous_count = count;
   timer = setTimeout(displayClicks,1000);
+  current_time++;  
+  if (current_time == no_time) {
+    displayNoButton();
+  }
 }
 
 
@@ -87,8 +113,12 @@ function incrementCounter(event) {
   } else {
 
     if ( (event.timeStamp - first_timestamp) < max_duration) {
-      count = count + 1;
-      changeImage();
+      if (no_button_displayed) {
+        count = Math.max(1,count - 100);
+      } else {
+       count = count + 1;
+       changeImage();
+      }
       $('#counter').text(count);
       $('#time').text((event.timeStamp - first_timestamp));
     } else {
@@ -114,7 +144,7 @@ function startNewGame() {
   setUpListeners(); 
   $('#counter').text(count);
   $('#time').text('0');
-
+  no_time = Math.floor((Math.random()*(max_duration - 5000))/1000 + 5);
 
 }
 
