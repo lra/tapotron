@@ -120,7 +120,7 @@ function incrementCounter(event) {
        changeImage();
       }
       $('#counter').text(count);
-      $('#time').text((event.timeStamp - first_timestamp));
+      $('#time').text(Math.round((max_duration - (event.timeStamp - first_timestamp)) / 1000));
     } else {
       clearTimeout(timer);
       sendResult();
@@ -143,7 +143,7 @@ function startNewGame() {
   changeImage();
   setUpListeners(); 
   $('#counter').text(count);
-  $('#time').text('0');
+  $('#time').text(Math.round(max_duration) / 1000);
   no_time = Math.floor((Math.random()*(max_duration - 5000))/1000 + 5);
 
 }
@@ -152,7 +152,5 @@ $(document).ready(function(){
   preloadImages(['button_up.png','button_down.png']);
   $('#start-button').click(function(){ startNewGame(); });
   getBestScore();
+	$('#time').text(Math.round(max_duration) / 1000);
 });
-
-
-
