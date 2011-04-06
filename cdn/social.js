@@ -1,0 +1,34 @@
+function displayFriends() {
+	FB.api(
+		{
+			method: 'fql.query',
+			query: 'SELECT uid, first_name, last_name, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+		},
+		function(response) {
+			displayFriendsDivs(response);
+		}
+	);
+}
+
+function displayFriendsDivs(rows) {
+	for(i = 0; i < rows.length; i++)
+	{
+		$('friendslist').append(
+		'<div class="friend" id="friend-'+rows[i].uid+'">'
+		+rows[i].first_name+'<br/>'
+		+'<img src='+rows[i].pic_square+'/>'
+		+'</div>');
+		
+		displayFriendsBestScore(rows[i].uid);
+	}
+}
+
+function displayFriendsBestScore(uid) {
+	$.get('/getScore/'+uid+'/',
+		function(data)
+		{
+			var score = data.split(':');
+			$('friend-'+uid).append('<br/>'+score[1]);
+		}
+	);
+}

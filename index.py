@@ -26,7 +26,6 @@ def base64_url_decode(data):
 def get_fbuid_from_signed_request(signed_request):
 	app_secret = config.get('facebook_app_secret_key')
 	fb_user_id = None
-
 	try:
 		sig, payload = signed_request.split(u'.', 1)
 		sig = base64_url_decode(sig)
@@ -71,6 +70,6 @@ class MainHandler(webapp.RequestHandler):
 				tapper = Tapper(facebook_uid = long(fb_uid))
 				self.response.out.write('New user!')
 			tapper.put()
-			template_values = {'uid': tapper.key()}
+			template_values = {'uid': tapper.key(), 'app_id':self.app_id}
 			path = 'templates/index.html'
 			self.response.out.write(template.render(path, template_values))

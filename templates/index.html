@@ -6,14 +6,32 @@
   <title>Tap'o'tron</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script src="/cdn/script.js"></script>
+  <script src="/cdn/social.js"></script>
   <link href="/cdn/class.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript">
 		/* The UID of the player */
-    var uid = "{{ uid }}";
+	var uid = "{{ uid }}";
   </script>
 
 </head>
 <body>
+
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+	FB.init({
+		appId  : {{app_id}}
+	  });
+	displayFriends();
+  };
+
+  (function() {
+	var e = document.createElement('script');
+	e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+	e.async = true;
+	document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
 
 <audio id="sound" src="/cdn/pppfs.wav" preload="auto"></audio>
 
@@ -30,6 +48,9 @@
 </ul>
 
 <div id='graph-container'>
+</div>
+
+<div id='friendslist'>
 </div>
 
 </body>
