@@ -32,8 +32,7 @@ function sendResult()
 function getBestScore() {
 	$.get('/getScore/'+uid+'/',function(data)
 	{
-		var score = data.split(':');
-		$('#best-score').text(score[1]);
+		$('#best-score').text(data);
 	});
 }
 

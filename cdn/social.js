@@ -39,8 +39,8 @@ function displayFriendsBestScore(uid)
 	$.get('/getScore/'+uid+'/',
 		function(data)
 		{
-			var score = data.split(':');
-			$('#friend-'+uid).append('<br/>'+score[1]);
+			// Non mais t'est pas bien ?! C'est quoi ce <br/>
+			$('#friend-'+uid).append('<br/>'+data);
 		}
 	);
 }
