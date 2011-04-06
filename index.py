@@ -25,6 +25,7 @@ def base64_url_decode(data):
 
 def get_fbuid_from_signed_request(signed_request):
 	app_secret = config.get('facebook_app_secret_key')
+	fb_user_id = None
 
 	try:
 		sig, payload = signed_request.split(u'.', 1)
@@ -59,7 +60,8 @@ class MainHandler(webapp.RequestHandler):
 	
 	def display_index(self, fb_uid):
 		if not fb_uid:
-			install_url = 'https://www.facebook.com/dialog/oauth?client_id='+self.app_id+'&redirect_uri=http://apps.facebook.com/tapotron/'
+			facebook_uri = config.get("facebook_uri")
+			install_url = 'https://www.facebook.com/dialog/oauth?client_id='+str(self.app_id)+'&redirect_uri='+facebook_uri
 			install_html = '<html><body><script type="text/javascript">parent.location.href="'+install_url+'";</script></body></html>'
 			self.response.out.write(install_html)
 		else:

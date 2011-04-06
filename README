@@ -9,3 +9,4 @@ Format of the config.yaml file:
 
 facebook_app_id: %FACEBOOK_APP_ID%
 facebook_app_secret_key: %FACEBOOK_APP_SECRET_KEY%
+facebook_uri: %FACEBOOK_APP_CANVAS_URL%
