@@ -15,4 +15,4 @@ class GetScoreHandler(webapp.RequestHandler):
 		except:
 			pass
 
-		self.response.out.write('Get '+uid+'\'s score: '+str(score))
+		self.response.out.write(str(score))
