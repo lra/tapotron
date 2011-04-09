@@ -53,32 +53,39 @@ function preloadImages()
 	cache.push(cacheImage3);
 }
 
-// change the image
-function changeImage()
-{
-	document.getElementById('sound').play();
-	$('#button').attr('src',cache[count % 2].src);
+// Displays the button in up state
+function showImageUp() {
+	$('#button').attr('src',cache[0].src);
 }
 
+// Displays the button in down state
+function showImageDown() {
+        document.getElementById('sound').play();
+        $('#button').attr('src',cache[1].src);
+}
 
 // registers keyboard and mouse to listen to each press
 function setUpListeners()
 {
-	$('body').click(incrementCounter);
-	$('body').keypress(incrementCounter);
+	$('body').mousedown(incrementCounter);
+	$('body').mouseup(showImageUp);
+	$('body').keydown(incrementCounter);
+	$('body').keyup(showImageUp);
 }
 
 function removeListeners()
 {
-	$('body').unbind('click',incrementCounter);
-	$('body').unbind('keypress',incrementCounter);
+	$('body').unbind('mousedown',incrementCounter);
+	$('body').unbind('mouseup',showImageUp);
+	$('body').unbind('keydown',incrementCounter);
+	$('body').unbind('keyup',showImageUp);
 }
 
 function displayNoButton()
 {
 	if (no_button_displayed)
 	{
-		changeImage();
+		showImageUp();
 		no_button_displayed = false;
 	}
 	else
@@ -119,7 +126,7 @@ function incrementCounter(event)
 	{
 		startTimer(event);
 		count = count + 1;
-		changeImage();
+		showImageDown();
 	}
 	else
 	{
@@ -132,7 +139,7 @@ function incrementCounter(event)
 			else
 			{
 				count = count + 1;
-				changeImage();
+				showImageDown();
 			}
 			$('#counter').text(count);
 			$('#time').text(Math.round((max_duration - (event.timeStamp - first_timestamp)) / 1000));
@@ -159,7 +166,7 @@ function startNewGame()
 	$('#button').fadeIn('slow', function() {});
 
 	$('#graph-container').empty();
-	changeImage();
+	showImageUp();
 	setUpListeners(); 
 	$('#counter').text(count);
 	$('#time').text(Math.round(max_duration) / 1000);
